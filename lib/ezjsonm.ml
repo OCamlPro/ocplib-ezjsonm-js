@@ -180,12 +180,7 @@ let json_of_js j =
 
 let from_string (s : string) : [> t] =
   try
-    print_endline "from_string 1";
-    let j = Js._JSON##parse (Js.string s) in
-    print_endline "from_string 2";
-    let r = json_of_js j in
-    print_endline "from_string 3";
-    r
+    Js._JSON##parse (Js.string s) |> json_of_js
   with (Js.Error e) ->
     if Js.to_string e##name = "SyntaxError" then
       parse_error `Null "Ezjsonm.from_string %s" (Js.to_string e##message)
