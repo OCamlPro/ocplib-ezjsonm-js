@@ -1,0 +1,23 @@
+begin program "test"
+  requires = [
+    "ocplib-ezjsonm-js"
+    (* "ezjsonm" *)
+    "jstest"
+  ]
+  files = [
+    "test.ml"
+  ]
+  build_rules = [
+    "%{test_FULL_DST_DIR}%/test.js" (
+      build_target = true
+      sources = %byte_exe( p = "test" )
+      commands = [ {
+        "js_of_ocaml"
+          (* "--pretty"
+           * "--no-inline" *)
+          (* "+weak.js" *)
+           %byte_exe( p = "test" )
+      } ]
+    )
+  ]
+end
