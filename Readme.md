@@ -18,4 +18,4 @@ switch.
 Use the package called `ocplib-ezjsonm-js` with your favorite build tool.
 
 Not everything is implemented (missing Sexplib, etc.) but `to_string` and
-`from_string` are 
+`from_string` are operational.
