@@ -23,6 +23,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *)
 
+open Js_of_ocaml
+
 type value =
   [ `Null
   | `Bool of bool
