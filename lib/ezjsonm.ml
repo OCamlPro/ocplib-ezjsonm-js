@@ -173,31 +173,38 @@ module Js_to_JSON = Make_Conv (Js_to_JSON_Converter)
 
 module JSON_to_Js = Make_Conv (JSON_to_Js_Converter)
 
-let json_of_js j =
-  let res = Js_to_JSON.convert [LeafZip j] in
+let value_of_js j = Js_to_JSON.convert [LeafZip j]
+
+let json_of_value res =
   match res with
   | `A l -> `A l
   | `O l -> `O l
   | _ -> assert false (* wrap res *)
 
-let from_string (s : string) : [> t] =
+let value_from_string (s : string) : value =
   try
-    Js._JSON##parse (Js.string s) |> json_of_js
+    Js._JSON##parse (Js.string s) |> value_of_js
   with (Js.Error e) ->
     if Js.to_string e##name = "SyntaxError" then
       parse_error `Null "Ezjsonm.from_string %s" (Js.to_string e##message)
     else Js.raise_js_error e
 
-let js_of_json j  = JSON_to_Js.convert [LeafZip (value j)]
+let from_string (s : string) : [> t] =
+  value_from_string s |> json_of_value
 
-let to_string ?(minify=true) (j : t) : string =
+let js_of_json j  = JSON_to_Js.convert [LeafZip (value j)]
+let js_of_value j  = JSON_to_Js.convert [LeafZip j]
+
+let value_to_string ?(minify=true) (j : value) : string =
   if minify then
-    Js._JSON##stringify (js_of_json j) |> Js.to_string
+    Js._JSON##stringify (js_of_value j) |> Js.to_string
   else
     Js.Unsafe.fun_call (Js.Unsafe.variable "JSON.stringify")
-      [| js_of_json j; Js.Unsafe.inject (Js.null); Js.Unsafe.inject 2 |]
+      [| js_of_value j; Js.Unsafe.inject (Js.null); Js.Unsafe.inject 2 |]
     |> Js.to_string
 
+let to_string ?(minify=true) (j : t) : string =
+  value_to_string ~minify (value j)
 
 
 (* Same as real Ezjsonm *)
