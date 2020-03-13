@@ -207,6 +207,13 @@ let to_string ?(minify=true) (j : t) : string =
   value_to_string ~minify (value j)
 
 
+(* Javascript objects additions *)
+
+let to_js json = js_of_json json
+let value_to_js json = js_of_value json
+let from_js js = value_of_js js |> json_of_value
+let value_from_js js = value_of_js js
+
 (* Same as real Ezjsonm *)
 
 let to_buffer ?minify buf json =

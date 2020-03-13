@@ -31,6 +31,8 @@
 
 *)
 
+open Js_of_ocaml
+
 (** {2 Basic types} *)
 
 type value =
@@ -69,6 +71,12 @@ val from_string: string -> [> t]
 val value_from_string: string -> value
 (** Read a JSON document from a string. *)
 
+val from_js: 'a Js.t Js.opt -> [> t]
+(** Convert a Javascript object to JSON. *)
+
+val value_from_js: 'a Js.t Js.opt -> value
+(** Convert a Javascript object to JSON. *)
+
 (** {2 Writing JSON documents} *)
 
 val to_channel: ?minify:bool -> out_channel -> t -> unit
@@ -84,6 +92,12 @@ val to_string: ?minify:bool -> t -> string
 val value_to_string: ?minify:bool -> value -> string
 (** Write a JSON document to a string. This goes via an intermediate
     buffer and so may be slow on large documents. *)
+
+val to_js: t -> Js_of_ocaml.Js.Unsafe.any
+(** Convert JSON to a Javascript object. *)
+
+val value_to_js: value -> Js_of_ocaml.Js.Unsafe.any
+(** Convert JSON to a Javascript object. *)
 
 (** {2 Constructors} *)
 
