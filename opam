@@ -1,0 +1,25 @@
+opam-version: "2.0"
+maintainer: [ "Alain Mebsout <alain.mebsout@ocamlpro.com>" ]
+authors: [ "Alain Mebsout <alain.mebsout@ocamlpro.com>" ]
+homepage: "https://github.com/OCamlPro/ocplib-ezjsonm-js"
+bug-reports: "https://github.com/OCamlPro/ocplib-ezjsonm-js/issues"
+dev-repo: "git+https://github.com/OCamlPro/ocplib-ezjsonm-js.git"
+synopsis:     "Drop-in Ezjsonm replacement compatible with Js_of_ocaml"
+description: """
+Js_of_ocaml doesn't have some of the tail call optimisations necessary
+for the implementation of Ezjsonm to not blow up. This library relies on
+the JSON parsing provided by the Javascript engine instead.
+"""
+
+build: [
+  [ make ]
+]
+
+install: [
+  [ make "install" ]
+]
+
+depends: [
+  "ocp-build"
+  "js_of_ocaml"
+]
