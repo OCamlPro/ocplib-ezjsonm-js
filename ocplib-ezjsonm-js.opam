@@ -20,6 +20,5 @@ install: [
 ]
 
 depends: [
-  "ocp-build"
-  "js_of_ocaml"
+  "js_of_ocaml-ppx"
 ]

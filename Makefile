@@ -1,20 +1,14 @@
 all: build
 
-build: _obuild
-	ocp-build build
+build:
+	dune build --profile release
 
-install: _obuild
-	ocp-build install
+install:
+	dune install
 
-_obuild: Makefile
-	ocp-build init
-
-clean: _obuild
-	ocp-build clean
+clean:
+	dune clean
 	-find -name \*~ -delete
 
-distclean: clean
-	rm -rf _obuild
-
 test: build
-	nodejs _obuild/test/test.js
+	nodejs _build/test/test.bc.js
