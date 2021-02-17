@@ -1,0 +1,6 @@
+(executable
+ (name test)
+ (modules test jstest)
+ (preprocess (pps js_of_ocaml-ppx))
+ (libraries ocplib-ezjsonm-js)
+ (modes js))

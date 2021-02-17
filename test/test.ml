@@ -63,7 +63,7 @@ let superheroes = {|
 |}
 
 
-let test_features ctxt =
+let test_features _ctxt =
   let super = from_string superheroes in
   let superheroes2 = to_string super in
   let super2 = from_string superheroes2 in
@@ -85,7 +85,7 @@ let test_features ctxt =
     );
   ()
 
-let mk_json_arr name size s =
+let mk_json_arr _name size s =
   String.concat "," (Array.make size s |> Array.to_list) |>
   Printf.sprintf "{\"a\":[%s]}"
 

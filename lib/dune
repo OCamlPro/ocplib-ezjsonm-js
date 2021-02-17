@@ -1,0 +1,5 @@
+(library
+ (public_name ocplib-ezjsonm-js)
+ (name ezjsonm)
+ (preprocess (pps js_of_ocaml-ppx))
+ (modes byte))

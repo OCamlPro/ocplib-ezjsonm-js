@@ -185,8 +185,8 @@ let value_from_string (s : string) : value =
   try
     Js._JSON##parse (Js.string s) |> value_of_js
   with (Js.Error e) ->
-    if Js.to_string e##name = "SyntaxError" then
-      parse_error `Null "Ezjsonm.from_string %s" (Js.to_string e##message)
+    if Js.to_string e##.name = "SyntaxError" then
+      parse_error `Null "Ezjsonm.from_string %s" (Js.to_string e##.message)
     else Js.raise_js_error e
 
 let from_string (s : string) : [> t] =
@@ -370,7 +370,7 @@ let map f t path =
     | h::tl ->
       match t with
       | `O d -> Some (`O (map_dict (fun t -> aux t tl) d h))
-      | j    -> None in
+      | _j    -> None in
   match aux t path with
   | None   -> raise Not_found
   | Some j -> j
