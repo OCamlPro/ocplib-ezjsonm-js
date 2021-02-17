@@ -1,30 +1,3 @@
-(* open Ast_mapper
- * open Ast_helper
- * open Asttypes
- * open Parsetree
- * open Longident *)
-
-(* let test_mapper argv =
- *   { default_mapper with
- *     expr = fun mapper expr ->
- *       match expr with
- *       | { pexp_desc =
- *           Pexp_extension ({ txt = "test"; loc }, pstr)} ->
- *         begin match pstr with
- *           | PStr [{ pstr_desc = Pstr_eval (e, [])}] ->
- *             (\* replace with f __LOC__*\)
- *             Exp.apply ~loc e [Nolabel, Exp.ident ~loc
- *                                 { loc; txt = Longident.parse "__LOC__"}]
- *           | _ ->
- *             raise (Location.Error (
- *                 Location.error ~loc
- *                   "[%test] accepts a function, e.g. [%test assert_equal]"))
- *         end
- *       (\* Delegate to the default mapper. *\)
- *       | x -> default_mapper.expr mapper x;
- *   }
- *
- * let () = register "test" test_mapper *)
 open Js_of_ocaml
 
 module Console = struct

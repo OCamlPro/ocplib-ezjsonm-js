@@ -4,3 +4,7 @@
  (preprocess (pps js_of_ocaml-ppx))
  (libraries ocplib-ezjsonm-js)
  (modes js))
+
+(rule
+ (alias runtest)
+ (action (run node test.bc.js)))

@@ -12,11 +12,8 @@ the JSON parsing provided by the Javascript engine instead.
 """
 
 build: [
-  [ make ]
-]
-
-install: [
-  [ make "install" ]
+  ["dune" "build" "-p" name "-j" jobs "--profile" "release"]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
 
 depends: [
